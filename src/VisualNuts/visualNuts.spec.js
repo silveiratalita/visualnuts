@@ -1,13 +1,12 @@
-const getInstance = require('./XMLConverter');
-const jdonData = require('../../order.json');
-const {convertToXML} = require('../../src/xmlConverter/XMLConverter');
+const getInstance = require('./visualNuts');
 
-describe('Testing xmlConverter/XMLConverter.js Constructor->', () => {
-  it('Without jsonData Arg', async() => {
-    expect(() => getInstance()).toThrowError();
+describe('Testing VisualNuts/visualNuts.js Constructor->', () => {
+  const test = 'teste';
+  it('With any Arg', async() => {
+    expect(() => getInstance(test)).not.toThrowError();
   });
 
   it('Full args', async() => {
-    expect(() => getInstance(jdonData)).not.toThrowError();
+    expect(() => getInstance()).not.toThrowError();
   });
 });
