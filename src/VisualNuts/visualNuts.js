@@ -28,45 +28,74 @@ class VisualNuts {
     }
   }
 
-  countriesAndLanuages(json) {
-    const numberOfCountries = json.length();
+  countriesAndLanuages(){
+  
+    const numberOfCountries = json.length;
+  
     let mostOfficialLanguagesDe=_mostOfficialLanguagesDe(json);
-;
-    let countryHighestNumberOfOfficialLanguages = _countryHighestNumberOfOfficialLanguages(json);
-    let mostCommonOfficialLanguagesOfAllCountries = _mostCommonOfficialLanguagesOfAllCountries(json);
+     let countryHighestNumberOfOfficialLanguages = _countryHighestNumberOfOfficialLanguages(json);
+     let mostCommonOfficialLanguagesOfAllCountries = _mostCommonOfficialLanguagesOfAllCountries(json);
 
-    _mostOfficialLanguagesDe(json){
+     function _mostOfficialLanguagesDe(){
      
       let arr = json.map((e) => {
-        if (e.languages.find(language = e.languages === 'de')) {
-          return e.country;
+        
+        if (e.languages.find(element => element === 'de')) {
+          
+          return e;
         }
-        console.log(`All countries that speak langue de are ${arr}`,)
+       
       })
+      const str='De is the official language in the countries' + JSON.stringify(arr);
+      return str
     }
-    _countryHighestNumberOfOfficialLanguages(json){
+
+    function _countryHighestNumberOfOfficialLanguages(){
       let count = 0;
-      for (let i = 0; i < json.length(); i++) {
-        if (json[i].languages.length() > count) {
-          count = json[i].languages.length();
+      let country;
+     
+      for (let i = 0; i < json.length; i++) {
+        if (json[i].languages.length > count) {
+          count = json[i].languages.length;
+          country = json[i].country;
         }
       }
-      return count;
+      const str = 'The country'+ country+' has the highest number of languages, there they speak' +count+' languages.'
+      return str;
 
     }
 
-    _mostCommonOfficialLanguagesOfAllCountries(json){
- 
+   function _mostCommonOfficialLanguagesOfAllCountries(){
+    let arr =[];
+    for (let i = 0; i <json.length; i++) {
+      for(let j = 0 ; j<json[i].languages.length; j++){
+       arr.push(json[i].languages[j]);
+      }
       
     }
+      const hashmap = arr.reduce( (acc, val) => {
+       acc[val] = (acc[val] || 0 ) + 1
+       return acc
+    },{})
+     return 'The most common language of all countries is '+ Object.keys(hashmap).reduce((a, b) => hashmap[a] > hashmap[b] ? a : b)
+  
 
     
+    }
+    
+    console.log('number of countries in the world :'+numberOfCountries + 'country with the most official languages: '+ mostOfficialLanguagesDe)
+    console.log("");
+    console.log( 'country with the highest number of official languages: '+countryHighestNumberOfOfficialLanguages);
+    console.log("");
+    console.log('countryHighestNumberOfOfficialLanguages: '+ mostCommonOfficialLanguagesOfAllCountries)
   }
 
-  _visualNuts(json) {
+  
+  _visualNuts() {
     this.oneTo100();
-    this.countriesAndLanuages(json);
+     this.countriesAndLanuages();
   }
+
 }
 
 /**
